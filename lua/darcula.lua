@@ -344,7 +344,7 @@ M.configure_highlights = function(color)
     hi(0, "SnacksPickerPreviewTitle", { fg = color.light_olive_green, bold = true })
     hi(0, "SnacksPickerBorder", { fg = color.dark_grey })
     -- Explorer
-    hi(0, "SnacksExplorerNormal", { bg = color.dark, fg = color.grey })
+    hi(0, "SnacksExplorerNormal", { bg = color.very_dark_gray, fg = color.grey })
     hi(0, "SnacksExplorerDir", { fg = color.light_blue, bold = true })
     hi(0, "SnacksExplorerFile", { fg = color.grey })
     hi(0, "SnacksExplorerTitle", { bg = color.dark_grey, fg = color.golden_yellow, bold = true })
