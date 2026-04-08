@@ -11,6 +11,14 @@ local config = {
       lsp_semantics_token = true,
       nvim_cmp = true,
       dap_nvim = true,
+      noice = true,
+      flash = true,
+      trouble = true,
+      todo_comments = true,
+      which_key = true,
+      mini = true,
+      barbar = true,
+      blink_cmp = true,
     },
   },
 }
@@ -302,21 +310,58 @@ M.configure_highlights = function(color)
   hi(0, "DiagnosticUnderlineWarn", { sp = color.pale_gold, undercurl = true })
   hi(0, "DiagnosticUnderlineWarning", { sp = color.pale_gold, undercurl = true })
   hi(0, "DiagnosticWarn", { ctermfg = 3, fg = color.pale_gold })
-  -- hi(0, "DiffAdd", { ctermbg = 4, fg = color._05 })
-  -- hi(0, "DiffAdded", { fg = color._05 })
-  -- hi(0, "DiffChange", { ctermbg = 5, fg = color._07 })
-  -- hi(0, "DiffDelete", { bold = true, ctermbg = 6, ctermfg = 12, fg = color.red })
-  -- hi(0, "DiffFile", { fg = color.red })
-  -- hi(0, "DiffLine", { fg = color.light_blue })
-  -- hi(0, "DiffNewFile", { fg = color._05 })
-  -- hi(0, "DiffRemoved", { fg = color.red })
-  -- hi(0, "DiffText", { bold = true, ctermbg = 9, fg = color.light_blue })
+  hi(0, "DiffAdd", { bg = "#2d4a2d" })
+  hi(0, "DiffAdded", { fg = color.light_olive_green })
+  hi(0, "DiffChange", { bg = "#2d3a4a" })
+  hi(0, "DiffDelete", { bg = "#4a2d2d", fg = color.red })
+  hi(0, "DiffFile", { fg = color.red })
+  hi(0, "DiffLine", { fg = color.light_blue })
+  hi(0, "DiffNewFile", { fg = color.light_olive_green })
+  hi(0, "DiffRemoved", { fg = color.red })
+  hi(0, "DiffText", { bg = "#3a4a5a", bold = true })
   hi(0, "Directory", { ctermfg = 159, fg = color.light_blue })
   if M.config.opt.integrations.snacks then
-    local dir_hl = vim.api.nvim_get_hl(0, { name = "Directory", link = false })
-    local fg = dir_hl.fg or color.bright_sky
-    hi(0, "SnacksPickerDirectory", { fg = fg, bold = true })
-    hi(0, "SnacksPickerDir", { fg = fg })
+    hi(0, "SnacksNormal", { bg = color.dark, fg = color.grey })
+    hi(0, "SnacksNormalNC", { bg = color.dark, fg = color.grey })
+    hi(0, "SnacksBackdrop", { bg = color.very_dark_gray })
+    hi(0, "SnacksWinBar", { fg = color.grey, bg = color.dark_grey })
+    hi(0, "SnacksWinBarNC", { fg = color.comment, bg = color.dark_grey })
+    -- Picker
+    hi(0, "SnacksPickerDir", { fg = color.light_blue })
+    hi(0, "SnacksPickerDirectory", { fg = color.light_blue, bold = true })
+    hi(0, "SnacksPickerFile", { fg = color.grey })
+    hi(0, "SnacksPickerMatch", { fg = color.golden_yellow, bold = true })
+    hi(0, "SnacksPickerInput", { bg = color.dark_charcoal_gray, fg = color.grey })
+    hi(0, "SnacksPickerInputBorder", { bg = color.dark_charcoal_gray, fg = color.dark_charcoal_gray })
+    hi(0, "SnacksPickerInputTitle", { fg = color.golden_yellow, bold = true })
+    hi(0, "SnacksPickerList", { bg = color.very_dark_gray })
+    hi(0, "SnacksPickerListCursorLine", { bg = color.dark_charcoal_gray })
+    hi(0, "SnacksPickerPreview", { bg = color.dark })
+    hi(0, "SnacksPickerPreviewTitle", { fg = color.light_olive_green, bold = true })
+    hi(0, "SnacksPickerBorder", { fg = color.dark_grey })
+    -- Explorer
+    hi(0, "SnacksExplorerNormal", { bg = color.very_dark_gray, fg = color.grey })
+    hi(0, "SnacksExplorerDir", { fg = color.light_blue, bold = true })
+    hi(0, "SnacksExplorerFile", { fg = color.grey })
+    -- Indent
+    hi(0, "SnacksIndent", { fg = color.dark_grey, nocombine = true })
+    hi(0, "SnacksIndentScope", { fg = color.burnt_orange, nocombine = true })
+    -- Notifier
+    hi(0, "SnacksNotifierInfo", { fg = color.bright_sky })
+    hi(0, "SnacksNotifierWarn", { fg = color.pale_gold })
+    hi(0, "SnacksNotifierError", { fg = color.red })
+    hi(0, "SnacksNotifierDebug", { fg = color.comment })
+    hi(0, "SnacksNotifierTrace", { fg = color.light_lavender })
+    -- Dashboard
+    hi(0, "SnacksDashboardNormal", { bg = color.dark, fg = color.grey })
+    hi(0, "SnacksDashboardHeader", { fg = color.burnt_orange, bold = true })
+    hi(0, "SnacksDashboardFooter", { fg = color.comment, italic = true })
+    hi(0, "SnacksDashboardKey", { fg = color.golden_yellow, bold = true })
+    hi(0, "SnacksDashboardDesc", { fg = color.grey })
+    hi(0, "SnacksDashboardIcon", { fg = color.light_blue })
+    -- Words (highlight under cursor)
+    hi(0, "SnacksWords", { sp = color.silver_gray, underline = true })
+    hi(0, "SnacksWordsCurrent", { sp = color.golden_yellow, underline = true })
   end
   hi(0, "Error", { bg = color.red, ctermbg = 9, ctermfg = 15, fg = color.dark })
   hi(0, "ErrorMsg", { ctermbg = 1, ctermfg = 15, fg = color.red })
@@ -331,6 +376,8 @@ M.configure_highlights = function(color)
   hi(0, "FinderVirtText", { fg = color.bright_red })
   hi(0, "Float", { fg = color.light_brown })
   hi(0, "FloatBorder", { fg = color.grey })
+  hi(0, "FloatTitle", { fg = color.golden_yellow, bold = true })
+  hi(0, "FloatFooter", { fg = color.comment })
   hi(0, "FocusedSymbol", { bg = color.background, fg = color.light_olive_green })
   hi(0, "FoldColumn", { ctermbg = 242 })
   hi(0, "Folded", { bg = color.background, ctermbg = 242 })
@@ -557,6 +604,153 @@ M.configure_highlights = function(color)
   hi(0, "TabLineSel", { bg = color.background, fg = color.light_olive_green })
   hi(0, "Tag", { fg = color.golden_yellow })
   hi(0, "TargetFileName", { fg = color.near_white })
+  -- noice.nvim
+  if M.config.opt.integrations.noice then
+    hi(0, "NoiceCmdline", { bg = color.dark_charcoal_gray, fg = color.grey })
+    hi(0, "NoiceCmdlinePopup", { bg = color.dark_charcoal_gray })
+    hi(0, "NoiceCmdlinePopupBorder", { fg = color.dark_grey })
+    hi(0, "NoiceCmdlinePopupTitle", { fg = color.golden_yellow, bold = true })
+    hi(0, "NoiceCmdlineIcon", { fg = color.golden_yellow })
+    hi(0, "NoiceCmdlineIconSearch", { fg = color.bright_sky })
+    hi(0, "NoiceConfirm", { bg = color.dark_charcoal_gray })
+    hi(0, "NoiceConfirmBorder", { fg = color.dark_grey })
+    hi(0, "NoicePopup", { bg = color.dark_charcoal_gray })
+    hi(0, "NoicePopupBorder", { fg = color.dark_grey })
+    hi(0, "NoicePopupmenu", { bg = color.charcoal_gray })
+    hi(0, "NoicePopupmenuSelected", { bg = color.dark_gray_blue })
+    hi(0, "NoicePopupmenuMatch", { fg = color.golden_yellow, bold = true })
+    hi(0, "NoiceMini", { bg = color.dark_grey })
+    hi(0, "NoiceFormatProgressDone", { bg = color.burnt_orange, fg = color.dark })
+    hi(0, "NoiceFormatProgressTodo", { bg = color.dark_grey, fg = color.grey })
+    hi(0, "NoiceLspProgressTitle", { fg = color.grey })
+    hi(0, "NoiceLspProgressClient", { fg = color.burnt_orange })
+    hi(0, "NoiceLspProgressSpinner", { fg = color.bright_sky })
+    hi(0, "NoiceVirtualText", { fg = color.comment })
+  end
+
+  -- flash.nvim
+  if M.config.opt.integrations.flash then
+    hi(0, "FlashLabel", { bg = color.deep_fuchsia, fg = color.very_light_gray, bold = true })
+    hi(0, "FlashMatch", { fg = color.bright_sky })
+    hi(0, "FlashCurrent", { fg = color.golden_yellow, bold = true })
+    hi(0, "FlashBackdrop", { fg = color.comment })
+    hi(0, "FlashCursor", { reverse = true })
+  end
+
+  -- trouble.nvim
+  if M.config.opt.integrations.trouble then
+    hi(0, "TroubleNormal", { bg = color.very_dark_gray, fg = color.grey })
+    hi(0, "TroubleNormalNC", { bg = color.very_dark_gray, fg = color.grey })
+    hi(0, "TroubleText", { fg = color.grey })
+    hi(0, "TroubleCount", { bg = color.dark_grey, fg = color.burnt_orange, bold = true })
+    hi(0, "TroubleIndent", { fg = color.dark_grey })
+    hi(0, "TroubleFoldIcon", { fg = color.burnt_orange })
+    hi(0, "TroubleLocation", { fg = color.comment })
+    hi(0, "TroubleSource", { fg = color.comment, italic = true })
+    hi(0, "TroubleError", { link = "DiagnosticError" })
+    hi(0, "TroubleWarning", { link = "DiagnosticWarn" })
+    hi(0, "TroubleHint", { link = "DiagnosticHint" })
+    hi(0, "TroubleInformation", { link = "DiagnosticInfo" })
+  end
+
+  -- todo-comments.nvim
+  if M.config.opt.integrations.todo_comments then
+    hi(0, "TodoBgTODO", { bg = color.bright_sky, fg = color.dark, bold = true })
+    hi(0, "TodoBgFIX", { bg = color.red, fg = color.dark, bold = true })
+    hi(0, "TodoBgHACK", { bg = color.golden_yellow, fg = color.dark, bold = true })
+    hi(0, "TodoBgWARN", { bg = color.light_brown, fg = color.dark, bold = true })
+    hi(0, "TodoBgNOTE", { bg = color.bright_green, fg = color.dark, bold = true })
+    hi(0, "TodoBgPERF", { bg = color.light_lavender, fg = color.dark, bold = true })
+    hi(0, "TodoBgTEST", { bg = color.lavender, fg = color.dark, bold = true })
+    hi(0, "TodoFgTODO", { fg = color.bright_sky })
+    hi(0, "TodoFgFIX", { fg = color.red })
+    hi(0, "TodoFgHACK", { fg = color.golden_yellow })
+    hi(0, "TodoFgWARN", { fg = color.light_brown })
+    hi(0, "TodoFgNOTE", { fg = color.bright_green })
+    hi(0, "TodoFgPERF", { fg = color.light_lavender })
+    hi(0, "TodoFgTEST", { fg = color.lavender })
+    hi(0, "TodoSignTODO", { fg = color.bright_sky })
+    hi(0, "TodoSignFIX", { fg = color.red })
+    hi(0, "TodoSignHACK", { fg = color.golden_yellow })
+    hi(0, "TodoSignWARN", { fg = color.light_brown })
+    hi(0, "TodoSignNOTE", { fg = color.bright_green })
+    hi(0, "TodoSignPERF", { fg = color.light_lavender })
+    hi(0, "TodoSignTEST", { fg = color.lavender })
+  end
+
+  -- which-key.nvim
+  if M.config.opt.integrations.which_key then
+    hi(0, "WhichKey", { fg = color.golden_yellow })
+    hi(0, "WhichKeyGroup", { fg = color.burnt_orange })
+    hi(0, "WhichKeyDesc", { fg = color.grey })
+    hi(0, "WhichKeyFloat", { bg = color.very_dark_gray })
+    hi(0, "WhichKeyBorder", { fg = color.dark_grey })
+    hi(0, "WhichKeySeparator", { fg = color.medium_gray })
+    hi(0, "WhichKeyValue", { fg = color.light_blue })
+  end
+
+  -- mini.nvim
+  if M.config.opt.integrations.mini then
+    hi(0, "MiniSurround", { bg = color.golden_yellow, fg = color.dark })
+    hi(0, "MiniPairsOpenClose", { fg = color.bright_sky, bold = true })
+    hi(0, "MiniIndentscopeSymbol", { fg = color.medium_gray, nocombine = true })
+    hi(0, "MiniIndentscopePrefix", { nocombine = true })
+  end
+
+  -- barbar.nvim
+  if M.config.opt.integrations.barbar then
+    hi(0, "BufferCurrent", { bg = color.dark, fg = color.grey })
+    hi(0, "BufferCurrentMod", { bg = color.dark, fg = color.golden_yellow })
+    hi(0, "BufferCurrentSign", { bg = color.dark, fg = color.bright_sky })
+    hi(0, "BufferCurrentIcon", { bg = color.dark })
+    hi(0, "BufferCurrentIndex", { bg = color.dark, fg = color.bright_sky })
+    hi(0, "BufferCurrentTarget", { bg = color.dark, fg = color.red, bold = true })
+    hi(0, "BufferVisible", { bg = color.dark_grey, fg = color.silver_gray })
+    hi(0, "BufferVisibleMod", { bg = color.dark_grey, fg = color.golden_yellow })
+    hi(0, "BufferVisibleSign", { bg = color.dark_grey, fg = color.medium_gray })
+    hi(0, "BufferVisibleIcon", { bg = color.dark_grey })
+    hi(0, "BufferVisibleIndex", { bg = color.dark_grey, fg = color.medium_gray })
+    hi(0, "BufferVisibleTarget", { bg = color.dark_grey, fg = color.red, bold = true })
+    hi(0, "BufferInactive", { bg = color.very_dark_gray, fg = color.comment })
+    hi(0, "BufferInactiveMod", { bg = color.very_dark_gray, fg = color.pale_gold })
+    hi(0, "BufferInactiveSign", { bg = color.very_dark_gray, fg = color.medium_gray })
+    hi(0, "BufferInactiveIcon", { bg = color.very_dark_gray })
+    hi(0, "BufferInactiveIndex", { bg = color.very_dark_gray, fg = color.medium_gray })
+    hi(0, "BufferInactiveTarget", { bg = color.very_dark_gray, fg = color.red, bold = true })
+    hi(0, "BufferTabpageFill", { bg = color.very_dark_gray })
+    hi(0, "BufferOffset", { bg = color.very_dark_gray, fg = color.grey })
+  end
+
+  -- blink.cmp
+  if M.config.opt.integrations.blink_cmp then
+    hi(0, "BlinkCmpMenu", { bg = color.charcoal_gray, fg = color.grey })
+    hi(0, "BlinkCmpMenuBorder", { bg = color.charcoal_gray, fg = color.dark_grey })
+    hi(0, "BlinkCmpMenuSelection", { bg = color.dark_gray_blue })
+    hi(0, "BlinkCmpLabel", { fg = color.grey })
+    hi(0, "BlinkCmpLabelMatch", { fg = color.golden_yellow, bold = true })
+    hi(0, "BlinkCmpLabelDeprecated", { fg = color.medium_gray, strikethrough = true })
+    hi(0, "BlinkCmpKindDefault", { fg = color.bright_sky })
+    hi(0, "BlinkCmpKindFunction", { fg = color.light_blue })
+    hi(0, "BlinkCmpKindMethod", { fg = color.light_blue })
+    hi(0, "BlinkCmpKindVariable", { fg = color.red })
+    hi(0, "BlinkCmpKindField", { fg = color.red })
+    hi(0, "BlinkCmpKindProperty", { fg = color.red })
+    hi(0, "BlinkCmpKindClass", { fg = color.golden_yellow })
+    hi(0, "BlinkCmpKindInterface", { fg = color.golden_yellow })
+    hi(0, "BlinkCmpKindStruct", { fg = color.golden_yellow })
+    hi(0, "BlinkCmpKindEnum", { fg = color.golden_yellow })
+    hi(0, "BlinkCmpKindKeyword", { fg = color.pale_gold })
+    hi(0, "BlinkCmpKindConstant", { fg = color.light_brown })
+    hi(0, "BlinkCmpKindSnippet", { fg = color.silver_gray })
+    hi(0, "BlinkCmpKindModule", { fg = color.grey })
+    hi(0, "BlinkCmpKindText", { fg = color.grey })
+    hi(0, "BlinkCmpDoc", { bg = color.dark_charcoal_gray, fg = color.grey })
+    hi(0, "BlinkCmpDocBorder", { bg = color.dark_charcoal_gray, fg = color.dark_grey })
+    hi(0, "BlinkCmpDocCursorLine", { bg = color.dark_grey })
+    hi(0, "BlinkCmpSignatureHelp", { bg = color.dark_charcoal_gray, fg = color.grey })
+    hi(0, "BlinkCmpSignatureHelpBorder", { bg = color.dark_charcoal_gray, fg = color.dark_grey })
+  end
+
   -- telescope
   if M.config.opt.integrations.telescope then
     hi(0, "TelescopeBorder", { bg = color.very_dark_gray, fg = color.very_dark_gray })
@@ -710,6 +904,106 @@ M.configure_highlights = function(color)
 
   hi(0, "@lsp.type.keyword.go", { link = "TSKeyword" })
   hi(0, "@lsp.type.string.go", { link = "TSString" })
+  -- Language-specific treesitter groups (IntelliJ Darcula matching)
+
+  -- Python
+  hi(0, "@attribute.python", { fg = color.burnt_orange })
+  hi(0, "@variable.builtin.python", { fg = color.burnt_orange, italic = true })
+  hi(0, "@string.special.python", { fg = color.olive_green })
+  hi(0, "@function.builtin.python", { fg = color.pale_taupe })
+  hi(0, "@type.builtin.python", { fg = color.burnt_orange })
+  hi(0, "@keyword.type.python", { fg = color.burnt_orange })
+  hi(0, "@constructor.python", { fg = color.golden_yellow })
+
+  -- Go
+  hi(0, "@lsp.type.namespace.go", { fg = color.grey })
+  hi(0, "@type.go", { fg = color.soft_cyan })
+  hi(0, "@function.go", { fg = color.pale_taupe })
+  hi(0, "@string.special.go", { fg = color.olive_green })
+  hi(0, "@keyword.coroutine.go", { fg = color.burnt_orange, bold = true })
+  hi(0, "@constant.builtin.go", { fg = color.burnt_orange })
+  hi(0, "@variable.member.go", { fg = color.grey })
+
+  -- TypeScript / JavaScript
+  hi(0, "@tag.tsx", { fg = color.golden_yellow })
+  hi(0, "@tag.javascript", { fg = color.golden_yellow })
+  hi(0, "@tag.attribute.tsx", { fg = color.pale_gold })
+  hi(0, "@tag.attribute.javascript", { fg = color.pale_gold })
+  hi(0, "@tag.delimiter.tsx", { fg = color.light_brown })
+  hi(0, "@tag.delimiter.javascript", { fg = color.light_brown })
+  hi(0, "@string.special.tsx", { fg = color.olive_green })
+  hi(0, "@string.special.javascript", { fg = color.olive_green })
+  hi(0, "@keyword.coroutine.typescript", { fg = color.burnt_orange })
+  hi(0, "@keyword.coroutine.javascript", { fg = color.burnt_orange })
+  hi(0, "@type.typescript", { fg = color.soft_cyan })
+  hi(0, "@type.builtin.typescript", { fg = color.burnt_orange })
+  hi(0, "@constructor.typescript", { fg = color.golden_yellow })
+  hi(0, "@constructor.javascript", { fg = color.golden_yellow })
+
+  -- Java / Kotlin
+  hi(0, "@attribute.java", { fg = color.lavender })
+  hi(0, "@attribute.kotlin", { fg = color.lavender })
+  hi(0, "@type.qualifier.java", { fg = color.grey })
+  hi(0, "@keyword.modifier.kotlin", { fg = color.burnt_orange })
+  hi(0, "@constructor.java", { fg = color.golden_yellow })
+  hi(0, "@constructor.kotlin", { fg = color.golden_yellow })
+
+  -- Rust
+  hi(0, "@label.rust", { fg = color.lavender, italic = true })
+  hi(0, "@function.macro.rust", { fg = color.bright_cyan })
+  hi(0, "@keyword.modifier.rust", { fg = color.burnt_orange, bold = true })
+  hi(0, "@type.qualifier.rust", { fg = color.burnt_orange })
+  hi(0, "@punctuation.special.rust", { fg = color.bright_cyan })
+
+  -- SQL
+  hi(0, "@keyword.sql", { fg = color.burnt_orange, bold = true })
+  hi(0, "@function.builtin.sql", { fg = color.pale_taupe })
+  hi(0, "@type.sql", { fg = color.golden_yellow })
+
+  -- HTML / CSS
+  hi(0, "@tag.html", { fg = color.golden_yellow })
+  hi(0, "@tag.attribute.html", { fg = color.pale_gold })
+  hi(0, "@string.html", { fg = color.olive_green })
+  hi(0, "@property.css", { fg = color.pale_gold })
+  hi(0, "@string.css", { fg = color.olive_green })
+  hi(0, "@tag.css", { fg = color.golden_yellow })
+  hi(0, "@number.css", { fg = color.steel_cyan })
+  hi(0, "@type.css", { fg = color.burnt_orange })
+  hi(0, "@keyword.css", { fg = color.burnt_orange })
+
+  -- JSON / YAML / TOML
+  hi(0, "@property.json", { fg = color.lavender })
+  hi(0, "@string.json", { fg = color.olive_green })
+  hi(0, "@property.yaml", { fg = color.lavender })
+  hi(0, "@string.yaml", { fg = color.olive_green })
+  hi(0, "@property.toml", { fg = color.lavender })
+  hi(0, "@string.toml", { fg = color.olive_green })
+  hi(0, "@type.toml", { fg = color.burnt_orange })
+
+  -- Markdown
+  hi(0, "@markup.heading.1.markdown", { fg = color.golden_yellow, bold = true })
+  hi(0, "@markup.heading.2.markdown", { fg = color.pale_gold, bold = true })
+  hi(0, "@markup.heading.3.markdown", { fg = color.burnt_orange, bold = true })
+  hi(0, "@markup.heading.4.markdown", { fg = color.light_brown, bold = true })
+  hi(0, "@markup.heading.5.markdown", { fg = color.lavender, bold = true })
+  hi(0, "@markup.heading.6.markdown", { fg = color.comment, bold = true })
+  hi(0, "@markup.strong.markdown", { bold = true })
+  hi(0, "@markup.italic.markdown", { italic = true })
+  hi(0, "@markup.raw.markdown", { fg = color.olive_green })
+  hi(0, "@markup.raw.block.markdown", { fg = color.olive_green })
+  hi(0, "@markup.link.markdown", { fg = color.bright_sky, underline = true })
+  hi(0, "@markup.link.url.markdown", { fg = color.deep_light_blue, underline = true })
+  hi(0, "@markup.link.label.markdown", { fg = color.light_blue })
+  hi(0, "@markup.list.markdown", { fg = color.burnt_orange })
+
+  -- Dockerfile
+  hi(0, "@keyword.dockerfile", { fg = color.burnt_orange, bold = true })
+  hi(0, "@string.dockerfile", { fg = color.olive_green })
+
+  -- Lua (vim-specific)
+  hi(0, "@variable.builtin.lua", { fg = color.burnt_orange })
+  hi(0, "@lsp.type.variable.lua", { fg = color.grey })
+
   hi(0, "Statement", { link = "TSKeyword" })
   hi(0, "Comment", { link = "TSComment" })
   hi(0, "Number", { link = "TSNumber" })
