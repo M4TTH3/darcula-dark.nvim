@@ -329,7 +329,7 @@ M.configure_highlights = function(color)
     hi(0, "SnacksTerminalTitle", { bg = color.very_dark_gray, fg = color.golden_yellow, bold = true })
     hi(0, "SnacksTerminalFooter", { bg = color.very_dark_gray, fg = color.comment })
     hi(0, "SnacksWinBar", { fg = color.grey, bg = color.dark_grey })
-    hi(0, "SnacksWinBarNC", { fg = color.comment, bg = color.dark_grey })
+    hi(0, "SnacksWinBarNC", { fg = color.silver_gray, bg = color.dark_grey })
     -- Picker
     hi(0, "SnacksPickerDir", { fg = color.light_blue })
     hi(0, "SnacksPickerDirectory", { fg = color.light_blue, bold = true })
