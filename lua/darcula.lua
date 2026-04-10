@@ -19,6 +19,10 @@ local config = {
       mini = true,
       barbar = true,
       blink_cmp = true,
+      render_markdown = true,
+      diffview = true,
+      ufo = true,
+      harpoon = true,
     },
   },
 }
@@ -775,6 +779,87 @@ M.configure_highlights = function(color)
     hi(0, "TelescopePromptTitle", { bg = color.red, fg = color.very_dark_gray })
     hi(0, "TelescopeResultsTitle", { bg = color.very_dark_gray, fg = color.very_dark_gray })
     hi(0, "TelescopeSelection", { bg = color.dark_charcoal_gray })
+  end
+
+  -- render-markdown.nvim
+  if M.config.opt.integrations.render_markdown then
+    hi(0, "RenderMarkdownH1", { fg = color.golden_yellow, bold = true })
+    hi(0, "RenderMarkdownH2", { fg = color.pale_gold, bold = true })
+    hi(0, "RenderMarkdownH3", { fg = color.burnt_orange, bold = true })
+    hi(0, "RenderMarkdownH4", { fg = color.light_brown, bold = true })
+    hi(0, "RenderMarkdownH5", { fg = color.lavender, bold = true })
+    hi(0, "RenderMarkdownH6", { fg = color.comment, bold = true })
+    hi(0, "RenderMarkdownH1Bg", { bg = "#3d3520", fg = color.golden_yellow, bold = true })
+    hi(0, "RenderMarkdownH2Bg", { bg = "#3a3328", fg = color.pale_gold, bold = true })
+    hi(0, "RenderMarkdownH3Bg", { bg = "#3a2e20", fg = color.burnt_orange, bold = true })
+    hi(0, "RenderMarkdownH4Bg", { bg = "#3a3020", fg = color.light_brown, bold = true })
+    hi(0, "RenderMarkdownH5Bg", { bg = "#2e2840", fg = color.lavender, bold = true })
+    hi(0, "RenderMarkdownH6Bg", { bg = "#303030", fg = color.comment, bold = true })
+    hi(0, "RenderMarkdownCode", { bg = color.very_dark_gray })
+    hi(0, "RenderMarkdownCodeBorder", { fg = color.comment })
+    hi(0, "RenderMarkdownCodeInline", { bg = color.background, fg = color.olive_green })
+    hi(0, "RenderMarkdownBullet", { fg = color.burnt_orange })
+    hi(0, "RenderMarkdownQuote", { fg = color.comment, italic = true })
+    hi(0, "RenderMarkdownDash", { fg = color.comment })
+    hi(0, "RenderMarkdownLink", { fg = color.bright_sky, underline = true })
+    hi(0, "RenderMarkdownMath", { fg = color.steel_cyan })
+    hi(0, "RenderMarkdownChecked", { fg = color.olive_green })
+    hi(0, "RenderMarkdownUnchecked", { fg = color.comment })
+    hi(0, "RenderMarkdownTodo", { fg = color.golden_yellow })
+    hi(0, "RenderMarkdownTableHead", { fg = color.burnt_orange, bold = true })
+    hi(0, "RenderMarkdownTableRow", { fg = color.grey })
+    hi(0, "RenderMarkdownSuccess", { fg = color.olive_green })
+    hi(0, "RenderMarkdownInfo", { fg = color.bright_sky })
+    hi(0, "RenderMarkdownHint", { fg = color.bright_sky })
+    hi(0, "RenderMarkdownWarn", { fg = color.pale_gold })
+    hi(0, "RenderMarkdownError", { fg = color.red })
+  end
+
+  -- diffview.nvim
+  if M.config.opt.integrations.diffview then
+    hi(0, "DiffviewNormal", { bg = color.dark, fg = color.grey })
+    hi(0, "DiffviewCursorLine", { bg = color.cursor_row })
+    hi(0, "DiffviewFilePanelTitle", { fg = color.golden_yellow, bold = true })
+    hi(0, "DiffviewFilePanelRootPath", { fg = color.burnt_orange, bold = true })
+    hi(0, "DiffviewFilePanelFileName", { fg = color.grey })
+    hi(0, "DiffviewFilePanelPath", { fg = color.comment })
+    hi(0, "DiffviewFilePanelInsertions", { fg = color.olive_green })
+    hi(0, "DiffviewFilePanelDeletions", { fg = color.red })
+    hi(0, "DiffviewFilePanelConflicts", { fg = color.pale_gold })
+    hi(0, "DiffviewFilePanelSelected", { fg = color.bright_sky, bold = true })
+    hi(0, "DiffviewStatusAdded", { fg = color.olive_green })
+    hi(0, "DiffviewStatusModified", { fg = color.bright_sky })
+    hi(0, "DiffviewStatusRenamed", { fg = color.bright_sky })
+    hi(0, "DiffviewStatusDeleted", { fg = color.red })
+    hi(0, "DiffviewStatusUntracked", { fg = color.olive_green })
+    hi(0, "DiffviewStatusIgnored", { fg = color.comment })
+    hi(0, "DiffviewFolderName", { fg = color.light_blue, bold = true })
+    hi(0, "DiffviewFolderSign", { fg = color.burnt_orange })
+    hi(0, "DiffviewHash", { fg = color.lavender })
+    hi(0, "DiffviewReference", { fg = color.warm_yellow })
+  end
+
+  -- nvim-ufo
+  if M.config.opt.integrations.ufo then
+    hi(0, "UfoFoldedFg", { fg = color.grey })
+    hi(0, "UfoFoldedBg", { bg = color.background })
+    hi(0, "UfoFoldedEllipsis", { fg = color.comment })
+    hi(0, "UfoCursorFoldedLine", { bg = color.cursor_row })
+    hi(0, "UfoPreviewSbar", { bg = color.dark_grey })
+    hi(0, "UfoPreviewThumb", { bg = color.comment })
+    hi(0, "UfoPreviewWinBar", { bg = color.background, fg = color.grey })
+    hi(0, "UfoPreviewCursorLine", { bg = color.selection_blue })
+  end
+
+  -- harpoon
+  if M.config.opt.integrations.harpoon then
+    hi(0, "HarpoonActive", { fg = color.golden_yellow, bold = true })
+    hi(0, "HarpoonInactive", { fg = color.comment })
+    hi(0, "HarpoonNumberActive", { fg = color.burnt_orange, bold = true })
+    hi(0, "HarpoonNumberInactive", { fg = color.comment })
+    hi(0, "HarpoonWindow", { bg = color.very_dark_gray, fg = color.grey })
+    hi(0, "HarpoonBorder", { bg = color.very_dark_gray, fg = color.comment })
+    hi(0, "HarpoonTitle", { fg = color.golden_yellow, bold = true })
   end
 
   hi(0, "TermCursor", { bg = color.very_light_gray, fg = color.dark })
