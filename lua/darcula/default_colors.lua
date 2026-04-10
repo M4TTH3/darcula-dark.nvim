@@ -5,7 +5,7 @@
 return {
   green = "#98be65",
   red = "#f43753",
-  grey = "#C9D0D3",
+  grey = "#A9B7C6",
   light_blue = "#b3deef",
   background = "#383838",
   pale_gold = "#d3b987",
@@ -59,4 +59,11 @@ return {
   deep_cyan = "#4682b4",
   deep_purple = "#392a52",
   deep_navy = "#151838",
+  selection_blue = "#214283",
+  cursor_row = "#323232",
+  line_number = "#606366",
+  annotation_yellow = "#BBB529",
+  doc_comment_green = "#629755",
+  html_tag_gold = "#E8BF6A",
+  separator = "#555555",
 }
